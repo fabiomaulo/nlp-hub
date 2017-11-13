@@ -1,10 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NlpHub", "src\NlpHub\NlpHub.csproj", "{DAAA1EE5-A33E-476A-9BA0-3AE48D691C7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NplHubTests", "test\NplHubTests\NplHubTests.csproj", "{DA090FC2-FBE4-4C30-9A46-236CC0E15CB2}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAAA1EE5-A33E-476A-9BA0-3AE48D691C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAAA1EE5-A33E-476A-9BA0-3AE48D691C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAAA1EE5-A33E-476A-9BA0-3AE48D691C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAAA1EE5-A33E-476A-9BA0-3AE48D691C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA090FC2-FBE4-4C30-9A46-236CC0E15CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA090FC2-FBE4-4C30-9A46-236CC0E15CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA090FC2-FBE4-4C30-9A46-236CC0E15CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA090FC2-FBE4-4C30-9A46-236CC0E15CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D6C44BB-89D8-4778-A24C-F9E0FD13A708}
 	EndGlobalSection
 EndGlobal
