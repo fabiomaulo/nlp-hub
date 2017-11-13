@@ -10,7 +10,7 @@ namespace NlpHub
 		/// <summary>
 		/// A code identifying the source of the decision
 		/// </summary>
-		public string DecisionIdentity { get; set; } = "undefined";
+		public string AnalyzerId { get; set; } = "undefined";
 
 		/// <summary>
 		/// The intent of an utterance
