@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using NlpHub;
+﻿using NlpHub;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NplHub
 {
 	public interface IUtteranceAnalyzers
 	{
-		IEnumerable<AnalyzedResult> Analyze(string utterance);
+		Task<IEnumerable<AnalyzedResult>> Analyze(string utterance);
 		void Register(IUtteranceAnalyzer analyzer);
 	}
 }

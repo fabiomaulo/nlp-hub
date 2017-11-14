@@ -26,51 +26,51 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 		}
 
 		[Test]
-		public void WhenNoRegisteredThenNoMatch()
+		public async Task WhenNoRegisteredThenNoMatch()
 		{
 			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
 			var utterance = "whatever";
-			IEnumerable<AnalyzedResult> actual = analyzers.Analyze(utterance);
+			IEnumerable<AnalyzedResult> actual = await analyzers.Analyze(utterance);
 			actual.Should().Be.Empty();
 		}
 
 		[Test]
-		public void WhenRegisteredWithMatchThenHaveMatch()
+		public async Task WhenRegisteredWithMatchThenHaveMatch()
 		{
 			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(new[] { new AnalyzedResult() });
 			analyzers.Register(analyzer);
-			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
+			IEnumerable<AnalyzedResult> actual = await analyzers.Analyze("whatever");
 			actual.Should().Not.Be.Null().And.Not.Be.Empty();
 		}
 
 		[Test]
-		public void WhenNullMatchThenEmptyResult()
+		public async Task WhenNullMatchThenEmptyResult()
 		{
 			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(null);
 			analyzers.Register(analyzer);
-			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
+			IEnumerable<AnalyzedResult> actual = await analyzers.Analyze("whatever");
 			actual.Should().Be.Empty();
 		}
 
 		[Test]
-		public void WhenNullMatchElementThenEmptyResult()
+		public async Task WhenNullMatchElementThenEmptyResult()
 		{
 			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(new AnalyzedResult[] { null });
 			analyzers.Register(analyzer);
-			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
+			IEnumerable<AnalyzedResult> actual = await analyzers.Analyze("whatever");
 			actual.Should().Be.Empty();
 		}
 
 		[Test]
-		public void WhenMatchNullElementThenIgnoreEmpty()
+		public async Task WhenMatchNullElementThenIgnoreEmpty()
 		{
 			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(new [] { new AnalyzedResult(), null });
 			analyzers.Register(analyzer);
-			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
+			IEnumerable<AnalyzedResult> actual = await analyzers.Analyze("whatever");
 			actual.Satisfies(x=> x.All(a=> a != null));
 			actual.Should().Have.Count.EqualTo(1);
 		}
