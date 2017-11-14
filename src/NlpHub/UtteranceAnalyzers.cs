@@ -13,6 +13,10 @@ namespace NplHub
 
 		public void Register(IUtteranceAnalyzer analyzer)
 		{
+			if(analyzer == null)
+			{
+				return;
+			}
 			analyzers.Add(analyzer);
 		}
 

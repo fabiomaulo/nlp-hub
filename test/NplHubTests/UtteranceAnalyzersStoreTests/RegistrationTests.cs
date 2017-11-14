@@ -59,5 +59,14 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 			actual.Satisfies(x=> x.All(a=> a != null));
 			actual.Should().Have.Count.EqualTo(1);
 		}
+
+		[Test]
+		public async Task WhenAnalyzeAfterRegisterNullThenNotThrows()
+		{
+			var analyzers = new UtteranceAnalyzers();
+			analyzers.Register(null);
+			IEnumerable<AnalyzedResult> actual = await analyzers.Analyze("whatever");
+			actual.Should().Be.Empty();
+		}
 	}
 }
