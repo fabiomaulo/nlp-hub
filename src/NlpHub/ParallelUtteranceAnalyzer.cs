@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NlpHub
@@ -20,9 +21,14 @@ namespace NlpHub
 			this.store = store ?? throw new ArgumentNullException(nameof(store));
 		}
 
-		public Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
+		public async Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
 		{
-			throw new NotImplementedException();
+			var analyzers = store.Registered();
+			var analyzerTasks = analyzers.Select(x => x.Analyze(utterance));
+			return (await Task.WhenAll(analyzerTasks))
+				.Where(x => x != null)
+				.SelectMany(x => x)
+				.Where(x => x != null);
 		}
 	}
 }
