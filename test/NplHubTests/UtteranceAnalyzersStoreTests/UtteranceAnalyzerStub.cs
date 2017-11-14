@@ -13,7 +13,7 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 			this.result = result;
 		}
 
-		public Task<IEnumerable<AnalyzedResult>> Matchs(string utterance)
+		public Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
 		{
 			return Task.FromResult(result);
 		}

@@ -23,7 +23,7 @@ namespace NplHub
 
 		public async Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
 		{
-			var analyzerTasks = analyzers.Select(x => x.Matchs(utterance));
+			var analyzerTasks = analyzers.Select(x => x.Analyze(utterance));
 			return (await Task.WhenAll(analyzerTasks))
 				.Where(x => x != null)
 				.SelectMany(x => x)
@@ -36,7 +36,7 @@ namespace NplHub
 			var safeEnough = isEnough ?? neverEnough;
 			foreach (var a in analyzers)
 			{
-				var r = await a.Matchs(utterance);
+				var r = await a.Analyze(utterance);
 				if(r == null)
 				{
 					continue;

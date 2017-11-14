@@ -13,6 +13,6 @@ namespace NlpHub
 		/// </summary>
 		/// <param name="utterance">The utterance to analyze</param>
 		/// <returns>The collection of matching result</returns>
-		Task<IEnumerable<AnalyzedResult>> Matchs(string utterance);
+		Task<IEnumerable<AnalyzedResult>> Analyze(string utterance);
 	}
 }

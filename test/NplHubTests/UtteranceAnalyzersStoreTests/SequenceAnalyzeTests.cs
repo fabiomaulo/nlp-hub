@@ -13,7 +13,7 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 	{
 		public class ExceptionUtteranceAnalyzer : IUtteranceAnalyzer
 		{
-			public Task<IEnumerable<AnalyzedResult>> Matchs(string utterance)
+			public Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
 			{
 				throw new NotImplementedException();
 			}
