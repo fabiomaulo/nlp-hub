@@ -41,7 +41,7 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(new[] { new AnalyzedResult() });
 			analyzers.Register(analyzer);
 			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
-			actual.Should().Not.Be.Empty();
+			actual.Should().Not.Be.Null().And.Not.Be.Empty();
 		}
 
 		[Test]
@@ -51,7 +51,7 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(null);
 			analyzers.Register(analyzer);
 			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
-			actual.Should().Not.Be.Empty();
+			actual.Should().Be.Empty();
 		}
 
 		[Test]
@@ -61,7 +61,7 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 			IUtteranceAnalyzer analyzer = new UtteranceAnalyzerStub(new AnalyzedResult[] { null });
 			analyzers.Register(analyzer);
 			IEnumerable<AnalyzedResult> actual = analyzers.Analyze("whatever");
-			actual.Should().Not.Be.Empty();
+			actual.Should().Be.Empty();
 		}
 
 		[Test]
