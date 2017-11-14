@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace NlpHub
 {
@@ -7,10 +8,16 @@ namespace NlpHub
 	/// </summary>
 	public class AnalyzedResult
 	{
+		private string analyzerId = "undefined";
+		private IEnumerable<Entity> entities = Enumerable.Empty<Entity>();
 		/// <summary>
 		/// A code identifying the source of the decision
 		/// </summary>
-		public string AnalyzerId { get; set; } = "undefined";
+		public string AnalyzerId
+		{
+			get => analyzerId;
+			set => analyzerId = value ?? "undefined";
+		}
 
 		/// <summary>
 		/// The intent of an utterance
@@ -20,7 +27,11 @@ namespace NlpHub
 		/// <summary>
 		/// Optional entities found.
 		/// </summary>
-		public IEnumerable<Entity> Entities { get; set; }
+		public IEnumerable<Entity> Entities
+		{
+			get => entities;
+			set => entities = value ?? Enumerable.Empty<Entity>();
+		}
 
 		public dynamic AnalyzedResponse { get; set; }
 	}
