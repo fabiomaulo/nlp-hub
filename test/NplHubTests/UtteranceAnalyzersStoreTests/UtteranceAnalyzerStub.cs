@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NplHubTests.UtteranceAnalyzersStoreTests
+namespace NplHubTests
 {
 	public class UtteranceAnalyzerStub : IUtteranceAnalyzer
 	{
