@@ -7,7 +7,7 @@ namespace NplHub
 {
 	public interface IUtteranceAnalyzers
 	{
-		void Register(IUtteranceAnalyzer analyzer);
+		IUtteranceAnalyzers Register(IUtteranceAnalyzer analyzer);
 		Task<IEnumerable<AnalyzedResult>> Analyze(string utterance);
 		Task<IEnumerable<AnalyzedResult>> SequenceAnalyze(string utterance, Func<IEnumerable<AnalyzedResult>, bool> isEnough);
 	}

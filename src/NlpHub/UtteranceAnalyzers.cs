@@ -11,13 +11,14 @@ namespace NplHub
 		private static Func<IEnumerable<AnalyzedResult>, bool> neverEnough = x => false;
 		private List<IUtteranceAnalyzer> analyzers = new List<IUtteranceAnalyzer>();
 
-		public void Register(IUtteranceAnalyzer analyzer)
+		public IUtteranceAnalyzers Register(IUtteranceAnalyzer analyzer)
 		{
 			if(analyzer == null)
 			{
-				return;
+				return this;
 			}
 			analyzers.Add(analyzer);
+			return this;
 		}
 
 		public async Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
