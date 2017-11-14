@@ -37,7 +37,11 @@ namespace NplHub
 			foreach (var a in analyzers)
 			{
 				var r = await a.Matchs(utterance);
-				results.AddRange(r);
+				if(r == null)
+				{
+					continue;
+				}
+				results.AddRange(r.Where(x => x != null));
 				if(safeEnough(r))
 				{
 					return results;

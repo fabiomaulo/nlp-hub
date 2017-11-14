@@ -39,5 +39,24 @@ namespace NplHubTests.UtteranceAnalyzersStoreTests
 			var actual = await analyzers.SequenceAnalyze("whatever", null);
 			actual.Should().Have.Count.EqualTo(2);
 		}
+
+		[Test]
+		public async Task WhenNullResultThenIgnoreJustNull()
+		{
+			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
+			analyzers.Register(new UtteranceAnalyzerStub(null));
+			analyzers.Register(new UtteranceAnalyzerStub(new[] { new AnalyzedResult() }));
+			var actual = await analyzers.SequenceAnalyze("whatever", null);
+			actual.Should().Have.Count.EqualTo(1);
+		}
+
+		[Test]
+		public async Task WhenNullElementsInResultThenIgnoreNull()
+		{
+			IUtteranceAnalyzers analyzers = new UtteranceAnalyzers();
+			analyzers.Register(new UtteranceAnalyzerStub(new AnalyzedResult[] { null, new AnalyzedResult() }));
+			var actual = await analyzers.SequenceAnalyze("whatever", null);
+			actual.Should().Have.Count.EqualTo(1);
+		}
 	}
 }
