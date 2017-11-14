@@ -3,25 +3,43 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace NplHub
 {
 	public class UtteranceAnalyzers : IUtteranceAnalyzers
 	{
-		private ConcurrentBag<IUtteranceAnalyzer> analyzers = new ConcurrentBag<IUtteranceAnalyzer>();
+		private static Func<IEnumerable<AnalyzedResult>, bool> neverEnough = x => false;
+		private List<IUtteranceAnalyzer> analyzers = new List<IUtteranceAnalyzer>();
+
+		public void Register(IUtteranceAnalyzer analyzer)
+		{
+			analyzers.Add(analyzer);
+		}
 
 		public async Task<IEnumerable<AnalyzedResult>> Analyze(string utterance)
 		{
 			var analyzerTasks = analyzers.Select(x => x.Matchs(utterance));
 			return (await Task.WhenAll(analyzerTasks))
 				.Where(x => x != null)
-				.SelectMany(x=> x)
+				.SelectMany(x => x)
 				.Where(x => x != null);
 		}
 
-		public void Register(IUtteranceAnalyzer analyzer)
+		public async Task<IEnumerable<AnalyzedResult>> SequenceAnalyze(string utterance, Func<IEnumerable<AnalyzedResult>, bool> isEnough = null)
 		{
-			analyzers.Add(analyzer);
+			var results = new List<AnalyzedResult>();
+			var safeEnough = isEnough ?? neverEnough;
+			foreach (var a in analyzers)
+			{
+				var r = await a.Matchs(utterance);
+				results.AddRange(r);
+				if(safeEnough(r))
+				{
+					return results;
+				}
+			}
+			return results;
 		}
 	}
 }
